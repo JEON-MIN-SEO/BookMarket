@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class MemberDTO {
 
-    Long memberId;
+    private Long memberId;
 
     private String userId;
 
@@ -14,6 +14,7 @@ public class MemberDTO {
 
     private String email;
 
+    //중복여부 정책 정하기
     private String name;
 
     private BigDecimal point;

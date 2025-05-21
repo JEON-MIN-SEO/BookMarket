@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
+//기본생성자 및 생성자 설명할 수 있도록 공부하기
 @Getter
 public enum MemberGrade {
     BRONZE(new BigDecimal("0"), new BigDecimal("0")),
