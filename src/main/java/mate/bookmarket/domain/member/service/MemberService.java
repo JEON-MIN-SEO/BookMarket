@@ -21,7 +21,7 @@ public class MemberService {
         extracted1(memberSignUpDTO);
 
         MemberEntity member = new MemberEntity();
-        member.signUpEntity(memberSignUpDTO);
+        member.signUp(memberSignUpDTO);
         memberRepository.save(member);
 
         return true;
