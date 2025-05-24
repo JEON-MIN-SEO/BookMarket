@@ -20,3 +20,5 @@ ORM(JPA)
 레스트풀이란?
 
 트랜잭셔널
+
+@RequiredArgsConstructor
