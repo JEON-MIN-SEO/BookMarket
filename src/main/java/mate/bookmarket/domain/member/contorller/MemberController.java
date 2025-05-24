@@ -1,9 +1,6 @@
 package mate.bookmarket.domain.member.contorller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mate.bookmarket.domain.member.dto.MemberDTO;
-//import mate.bookmarket.domain.member.dto.request.SignUpDTO;
 import mate.bookmarket.domain.member.dto.request.MemberLogInDTO;
 import mate.bookmarket.domain.member.dto.request.MemberSignUpDTO;
 import mate.bookmarket.domain.member.service.MemberService;

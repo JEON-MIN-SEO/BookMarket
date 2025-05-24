@@ -45,7 +45,7 @@ public class MemberEntity {
     @Column
     private Boolean isWithdrawn = false;
 
-    public void signUpEntity(MemberSignUpDTO memberSignUpDTO) {
+    public void signUp(MemberSignUpDTO memberSignUpDTO) {
         this.userId = memberSignUpDTO.getUserId();
         this.password = memberSignUpDTO.getPassword();
         this.email = memberSignUpDTO.getEmail();
