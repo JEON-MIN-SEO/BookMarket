@@ -22,12 +22,12 @@ public enum MemberGrade {
     }
 
     //회원 등급에 따른 받을 포인트 금액
-    BigDecimal calculatePoint(BigDecimal price) {
+    public BigDecimal calculatePoint(BigDecimal price) {
         return price.multiply(pointRate);
     }
 
     //회원 등급에 따른 할인 금액
-    BigDecimal calculateDiscount(BigDecimal price) {
+    public BigDecimal calculateDiscount(BigDecimal price) {
         return price.multiply(discountRate);
     }
 
