@@ -12,7 +12,10 @@ RestAPI
 ORM(JPA)
 
 리스폰스 엔티티
-직렬화 역직렬
+직렬화 역직렬###
+
+    @Transactional //save없이 Transactional을 달리면 가능 => 더티체킹 + 영속성
+
 
 @NotBlank
 @Valid
@@ -22,3 +25,18 @@ ORM(JPA)
 트랜잭셔널
 
 @RequiredArgsConstructor
+
+순환참조 에러
+
+회원탈퇴 정책
+다시 재가입 가능한건지 ==
+id, email 다시 사용할 수 있는지 ==
+시간제한 있는지
+등
+
+로그인시 회원탈퇴 혹은 사용정지인지 ==
+
+record 클래스
+
+트랜잭셔널 역할
+동기 비동기
