@@ -8,6 +8,7 @@ import mate.bookmarket.common.enums.MemberGrade;
 import mate.bookmarket.domain.member.dto.request.MemberSignUpDTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Member")
@@ -20,8 +21,8 @@ public class MemberEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    @Column
-    private String userId;
+    @Column(nullable = false,unique = true)
+    private String userId; //username으로 변경하기
 
     @Column
     private String password;
@@ -29,6 +30,7 @@ public class MemberEntity {
     @Column
     private String email;
 
+    //실명
     @Column
     private String name;
 
@@ -45,6 +47,9 @@ public class MemberEntity {
     @Column
     private Boolean isWithdrawn = false;
 
+    @Column
+    private LocalDate deleteDate;
+
     public void signUp(MemberSignUpDTO memberSignUpDTO) {
         this.userId = memberSignUpDTO.getUserId();
         this.password = memberSignUpDTO.getPassword();
@@ -54,5 +59,10 @@ public class MemberEntity {
 //        this.point = new BigDecimal("0");
 //        this.isSuspended = false;
 //        this.isWithdrawn = false;
+    }
+
+    public void deleteUser() {
+        this.isWithdrawn = true;
+        this.deleteDate = LocalDate.now();
     }
 }
