@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import mate.bookmarket.common.enums.MemberGrade;
 import mate.bookmarket.domain.member.entity.MemberEntity;
 import mate.bookmarket.domain.member.repository.MemberRepository;
-import mate.bookmarket.domain.point.dto.PointPendingDTO;
 import mate.bookmarket.domain.point.dto.request.PointPendingRequestDTO;
 import mate.bookmarket.domain.point.entity.PointEntity;
 import mate.bookmarket.domain.point.repositroy.PointRepository;
@@ -31,7 +30,6 @@ public class PointService {
         if (member == null) {
             throw new IllegalArgumentException("회원이 존재하지 않습니다.");
         }
-        
         //회원 등급
         MemberGrade memberGrade = member.getMyGrade();
 
