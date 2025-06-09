@@ -1,10 +1,12 @@
 package mate.bookmarket.domain.point.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mate.bookmarket.common.enums.MemberGrade;
 import mate.bookmarket.domain.member.entity.MemberEntity;
 import mate.bookmarket.domain.member.repository.MemberRepository;
 import mate.bookmarket.domain.point.dto.request.PointPendingRequestDTO;
+import mate.bookmarket.domain.point.dto.request.RePointPendingRequestDTO;
 import mate.bookmarket.domain.point.entity.PointEntity;
 import mate.bookmarket.domain.point.repositroy.PointRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ public class PointService {
     //구매 -> 포인트 적립을 요청
     //적립 예상금 계산
     //적립
+    @Transactional
     public BigDecimal pendingPoint(PointPendingRequestDTO requestDTO) {
 
         //회원 찾기
@@ -51,9 +54,30 @@ public class PointService {
     }
 
     //포인트 적립 취소 (환불)
-    //어떤 주문이 환불인지 확인
-    //팬딩을 삭제 후 다시 적립 요청
-    //변동된 총 가격으로 계산 후 적립
+    //3개의 도서 중 1개만 환불한 경우 등등
+    /// 주문당 포인트 적립이 아닌 도서 별 포인트 적립으로 변경
+    @Transactional
+    public BigDecimal cancelPending(RePointPendingRequestDTO pendingRequestDTO) {
+        //어떤 주문이 환불인지 확인
+        /// 해당 포인트 팬딩 상태를 취소로 변경
+        PointEntity point = pointRepository.findByOrderId(pendingRequestDTO.getOrderId());
+        if (point == null) {
+            throw new IllegalArgumentException("해당 주문이 존재하지 않습니다.");
+        }
+
+        //상태를 취소로 변경
+        point.changeStatus();
+
+        //위에있는 pendingPoint 메서드를 사용하기 위해 DTO를 만들기
+        /// 멤버ID, 가격, 주문ID
+        PointPendingRequestDTO pointPendingRequestDTO
+                = new PointPendingRequestDTO(point.getMember().getMemberId(), pendingRequestDTO.getBooksAmount(), pendingRequestDTO.getOrderId());
+
+        //변동된 총 가격으로 계산 후 적립
+        /// 같은 클래스 메인 메서드를 불러서 사용하는건 좋지 않음
+        return pendingPoint(pointPendingRequestDTO);
+
+    }
 
     //포인트 적립 확정 (스케줄러 기반)
     //매일 0시에 체크

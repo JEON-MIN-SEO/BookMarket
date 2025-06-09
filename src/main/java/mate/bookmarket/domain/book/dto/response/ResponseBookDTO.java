@@ -6,4 +6,5 @@ import lombok.Getter;
 public class ResponseBookDTO {
 
     private Long bookId;
+
 }

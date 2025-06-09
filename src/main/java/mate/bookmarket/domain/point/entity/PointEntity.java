@@ -46,10 +46,15 @@ public class PointEntity {
         PointEntity point = new PointEntity();
         point.member = member;
         point.pointPendingAmount = pointPendingAmount;
+        //환불을 한 경우에는 변경하지 않도록 함
         point.pointScheduledDate = LocalDate.now().plusDays(3);
         point.orderId = orderId;
         point.status = PointPendingStatus.WAITING;
 
         return point;
+    }
+
+    public void changeStatus() {
+        this.status = PointPendingStatus.CANCELLED;
     }
 }
